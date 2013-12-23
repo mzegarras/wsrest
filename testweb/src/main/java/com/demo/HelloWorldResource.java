@@ -8,6 +8,7 @@ import org.restlet.ext.jackson.JacksonRepresentation;
 import org.restlet.representation.Representation;
 import org.restlet.resource.Get;
 import org.restlet.resource.ServerResource;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class HelloWorldResource extends ServerResource {
 	
@@ -15,6 +16,10 @@ public class HelloWorldResource extends ServerResource {
 	
 	static Logger logger = Logger.getLogger(HelloWorldResource.class);
 	
+	
+	
+	@Autowired
+    private User user;
 	
 	@Override
     public void init(Context context, Request request, Response response) {

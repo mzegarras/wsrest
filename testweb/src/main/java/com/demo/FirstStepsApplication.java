@@ -3,9 +3,15 @@ package com.demo;
 import org.restlet.Application;
 import org.restlet.Restlet;
 import org.restlet.routing.Router;
+import org.springframework.context.ApplicationContext;
 
+
+//@Component("application")
 public class FirstStepsApplication  extends Application {
 
+	
+	
+    
     /**
      * Creates a root Restlet that will receive all incoming calls.
      */
@@ -24,5 +30,8 @@ public class FirstStepsApplication  extends Application {
 
         return router;
     }
+    
+    
+    
 
 }
