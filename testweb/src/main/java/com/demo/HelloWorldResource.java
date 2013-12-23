@@ -19,6 +19,8 @@ public class HelloWorldResource extends ServerResource {
 	 @Get ("json")
 	 public Representation sendResponse(){
 	     User user = new User();
+	     user.setId("1");
+	     user.setName("mzegarras");
 	     return new JacksonRepresentation<User>(user);
 	 }
 }
