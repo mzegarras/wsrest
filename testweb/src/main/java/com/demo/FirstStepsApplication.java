@@ -17,6 +17,9 @@ public class FirstStepsApplication  extends Application {
 
         // Defines only one route
         router.attach("/hello", HelloWorldResource.class);
+        router.attach("/users/{user}", UserResource.class); 
+        router.attach("/users/{user}/orders", OrdersResource.class);
+        router.attach("/users/{user}/orders/{order}", OrdersResource.class);
         //router.attach("/cliente", ClienteResource.class);
 
         return router;
