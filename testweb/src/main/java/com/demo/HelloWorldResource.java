@@ -9,39 +9,70 @@ import org.restlet.representation.Representation;
 import org.restlet.resource.Get;
 import org.restlet.resource.ServerResource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.beans.factory.annotation.Required;
+import org.springframework.stereotype.Component;
 
-public class HelloWorldResource extends ServerResource {
+
+
+public class HelloWorldResource extends ServerResource  {
 	
 	
 	
 	static Logger logger = Logger.getLogger(HelloWorldResource.class);
-	
-	
-	
+	/*
 	@Autowired
-    private User user;
-	
+    private UserService userService;
+
+	public UserService getUserService() {
+		return userService;
+	}
+
+
+
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}*/
+
+
+
 	@Override
     public void init(Context context, Request request, Response response) {
         super.init(context, request, response);
         // code originally in non-default constructor
         logger.debug("HelloWorldResource:init");
+      
     }
 	
-	
+
+
+
+
+
+
 	@Get  
 	public String toString() {  
 	    // Print the requested URI path  
-	    return "Resource URI  : " + getReference() + '\n' + "Root URI      : "  
+	
+		/*if(userService==null)
+	 		return "Es Nulo";
+	 	else*/
+	 		 return "Resource URI  : " + getReference() + '\n' + "Root URI      : "  
 	            + getRootRef() + '\n' + "Routed part   : "  
 	            + getReference().getBaseRef() + '\n' + "Remaining part: "  
 	            + getReference().getRemainingPart();  
+	   
 	} 
 	
 	 @Get("?flavor1")
 	    public String represent() {
 		 	logger.debug("HelloWorldResource");
-	        return "hello, world";
+		 	
+		 /*	if(userService==null)
+		 		return "Es Nulo";
+		 	else*/
+		 		return "No Es Nulo";
 	    }
 	 
 	 /*

@@ -5,10 +5,27 @@ import org.restlet.Request;
 import org.restlet.Response;
 import org.restlet.resource.Get;
 import org.restlet.resource.ServerResource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
+import org.springframework.stereotype.Component;
+
 
 public class UserResource extends ServerResource { 
 
 	
+	private UserService userService;
+	
+
+	public UserService getUserService() {
+		return userService;
+	}
+
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+
+
 	String userName;  
 	Object user;
 	
@@ -26,7 +43,10 @@ public class UserResource extends ServerResource {
 	
 	@Get  
     public String toString() {  
-        return "Account of user \"" + this.userName + "\"";  
+		if(userService!=null)
+			return "Account of user \"" + this.userName + "\"" + userService.doMessge();
+		else
+			return "Account of user \"" + this.userName + "\"" + "NULO";
     }
 	
 	
