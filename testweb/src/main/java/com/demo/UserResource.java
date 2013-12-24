@@ -5,9 +5,11 @@ import org.restlet.Request;
 import org.restlet.Response;
 import org.restlet.resource.Get;
 import org.restlet.resource.ServerResource;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Required;
-import org.springframework.stereotype.Component;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.integration.Message;
+import org.springframework.integration.MessageChannel;
+import org.springframework.integration.support.MessageBuilder;
 
 
 public class UserResource extends ServerResource { 
@@ -43,11 +45,24 @@ public class UserResource extends ServerResource {
 	
 	@Get  
     public String toString() {  
+		//inputChannel.send(new GenericMessage<String>("World"));
+		//String msg =  outputChannel.receive().getPayload().toString();
+		
+		
+		   String cfg = "/spring-config.xml";
+		   
+		   ApplicationContext context = new ClassPathXmlApplicationContext(cfg);
+		    MessageChannel channel = context.getBean("names", MessageChannel.class);
+		    Message<String> message = MessageBuilder.withPayload("World").build();
+		    channel.send(message);
+		    
+		    
 		if(userService!=null)
-			return "Account of user \"" + this.userName + "\"" + userService.doMessge();
+			return "Account of user \"" + this.userName + "\"" + userService.doMessge() ;
 		else
 			return "Account of user \"" + this.userName + "\"" + "NULO";
     }
+	
 	
 	
 }
