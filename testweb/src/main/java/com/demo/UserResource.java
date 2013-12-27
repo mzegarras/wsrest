@@ -6,9 +6,12 @@ import org.restlet.Response;
 import org.restlet.resource.Get;
 import org.restlet.resource.ServerResource;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.integration.Message;
 import org.springframework.integration.MessageChannel;
+import org.springframework.integration.core.PollableChannel;
+import org.springframework.integration.message.GenericMessage;
 import org.springframework.integration.support.MessageBuilder;
 
 
@@ -51,14 +54,14 @@ public class UserResource extends ServerResource {
 		
 		   String cfg = "/spring-config.xml";
 		   
-		   ApplicationContext context = new ClassPathXmlApplicationContext(cfg);
-		    MessageChannel channel = context.getBean("names", MessageChannel.class);
-		    Message<String> message = MessageBuilder.withPayload("World").build();
-		    channel.send(message);
-		    
+		   AbstractApplicationContext context = new ClassPathXmlApplicationContext(cfg, UserResource.class);
+           MessageChannel inputChannel = context.getBean("inputChannel", MessageChannel.class);
+           PollableChannel outputChannel = context.getBean("outputChannel", PollableChannel.class);
+           inputChannel.send(new GenericMessage<String>("World"));
+           
 		    
 		if(userService!=null)
-			return "Account of user \"" + this.userName + "\"" + userService.doMessge() ;
+			return "Account of user \"" + this.userName + "\"" + userService.doMessge() + outputChannel.receive(0).getPayload();
 		else
 			return "Account of user \"" + this.userName + "\"" + "NULO";
     }
