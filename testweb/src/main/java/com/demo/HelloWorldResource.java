@@ -75,14 +75,14 @@ public class HelloWorldResource extends ServerResource  {
 		 		return "No Es Nulo";
 	    }
 	 
-	 /*
-	 @Get ("json")
+	 
+	 @Get ("?flavor2")
 	 public Representation sendResponse(){
 	     User user = new User();
 	     user.setId("1");
 	     user.setName("mzegarras");
 	     return new JacksonRepresentation<User>(user);
-	 }*/
+	 }
 	 
 	 
 	

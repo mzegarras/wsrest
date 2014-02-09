@@ -1,10 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:integration="http://www.springframework.org/schema/integration"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd">
+	
+    
+    
+    
+     
+       
+       
+       
+       
+ 
+ 
+    <context:annotation-config />
+    <context:component-scan base-package="com.demo"/>
+ 
+	
 	<bean id="router" class="org.restlet.ext.spring.SpringRouter">
 		<property name="attachments">
 			<map>
+				<entry key="/cliente" value="com.demo.ClienteResource" />
 				<entry key="/hello" value="com.demo.HelloWorldResource" />
 				<entry key="/order/{user}" value="com.demo.OrdersResource" />
 				<entry key="/user/{user}">

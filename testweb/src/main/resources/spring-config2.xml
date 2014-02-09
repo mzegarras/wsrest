@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:integration="http://www.springframework.org/schema/integration"
+       xmlns:beans="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd">
+ 
+   <context:annotation-config />
+    <context:component-scan base-package="com.demo"/>
+ 
+    
+ 
+    <!-- this channel is called by the application and the message is passed to it -->
+    <integration:channel id="inputChannel"/>
+ 
+    
+    <integration:channel id="outputChannel">
+        <integration:queue capacity="10" />
+    </integration:channel>
+
+    <!-- 
+    <integration:service-activator input-channel="inputChannel" ref="saludoService" method="sayHello" output-channel="inputChannel2"/>
+       
+    
+    <integration:channel id="inputChannel2"/>
+    <integration:service-activator input-channel="inputChannel2" ref="saludoService" method="upper" output-channel="outputChannel"/>
+ 
+ 	<integration:gateway service-interface="com.demo.Greetings"  
+ 	    	default-request-channel="inputChannel" 
+ 	    	default-reply-channel="outputChannel"/> 
+ 	 
+ 	 -->
+ 	 
+ 	 
+ 	 
+ 	 <integration:gateway service-interface="com.demo.Greetings"   
+ 	     	default-request-channel="inputChannel"  
+ 	     	default-reply-channel="outputChannel"/> 
+ 	    
+ 	  
+ 	<integration:chain  input-channel="inputChannel" output-channel="outputChannel">
+ 	    <integration:service-activator ref="saludoService" method="sayHello"/>
+ 	    <integration:service-activator ref="saludoService" method="upper"/>
+ 	</integration:chain>
+ 	    	
+</beans>

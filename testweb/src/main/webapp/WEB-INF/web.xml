@@ -9,8 +9,11 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j
 </listener>
 <context-param>
 <param-name>contextConfigLocation</param-name>
-<param-value>classpath:applicationContext.xml</param-value>
-
+<param-value>
+    classpath:applicationContext.xml,
+    classpath:spring-config2.xml
+    
+    </param-value>
 </context-param>
 <servlet>
 <servlet-name>rest</servlet-name>

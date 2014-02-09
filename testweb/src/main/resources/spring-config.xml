@@ -6,7 +6,7 @@
                         http://www.springframework.org/schema/beans/spring-beans.xsd
                         http://www.springframework.org/schema/integration
                         http://www.springframework.org/schema/integration/spring-integration.xsd">
-
+    
         <channel id="inputChannel"/>
 
         <channel id="outputChannel">
@@ -19,5 +19,6 @@
                            method="sayHello"/>
 
         <beans:bean id="helloService" class="com.demo.HelloService"/>
-
+		
+		
 </beans:beans>

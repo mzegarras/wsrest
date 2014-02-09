@@ -5,6 +5,8 @@ import org.restlet.Request;
 import org.restlet.Response;
 import org.restlet.resource.Get;
 import org.restlet.resource.ServerResource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -44,26 +46,39 @@ public class UserResource extends ServerResource {
 	     this.user = null; // Could be a lookup to a domain object.  
 	        
 	}
+
 	
+	@Autowired 
+	Greetings greetings;
 	
+	@Get("?d1")
+    public String demo1() {
+		// create a message with the content "World"
+        greetings.send("MANUEL ZEGARRA");
+        
+        return greetings.receive();
+        
+	}
 	@Get  
     public String toString() {  
 		//inputChannel.send(new GenericMessage<String>("World"));
 		//String msg =  outputChannel.receive().getPayload().toString();
 		
 		
-		   String cfg = "/spring-config.xml";
+		  String cfg = "/spring-config.xml";
 		   
 		   AbstractApplicationContext context = new ClassPathXmlApplicationContext(cfg, UserResource.class);
-           MessageChannel inputChannel = context.getBean("inputChannel", MessageChannel.class);
+           MessageChannel inputChannel2 = context.getBean("inputChannel", MessageChannel.class);
            PollableChannel outputChannel = context.getBean("outputChannel", PollableChannel.class);
-           inputChannel.send(new GenericMessage<String>("World"));
+           inputChannel2.send(new GenericMessage<String>("World"));
+		
            
 		    
-		if(userService!=null)
+		if(inputChannel2!=null)
 			return "Account of user \"" + this.userName + "\"" + userService.doMessge() + outputChannel.receive(0).getPayload();
 		else
 			return "Account of user \"" + this.userName + "\"" + "NULO";
+	
     }
 	
 	
