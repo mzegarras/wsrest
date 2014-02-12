@@ -11,8 +11,8 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j
 <param-name>contextConfigLocation</param-name>
 <param-value>
     classpath:applicationContext.xml,
-    classpath:spring-config2.xml
-    
+    classpath:spring-config2.xml,
+    classpath:spring-config3.xml
     </param-value>
 </context-param>
 <servlet>

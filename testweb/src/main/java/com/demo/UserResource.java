@@ -16,6 +16,10 @@ import org.springframework.integration.core.PollableChannel;
 import org.springframework.integration.message.GenericMessage;
 import org.springframework.integration.support.MessageBuilder;
 
+import com.demo.dao.UserDAO;
+import com.demo.entidades.User;
+import com.google.gson.annotations.Until;
+
 
 public class UserResource extends ServerResource { 
 
@@ -48,16 +52,26 @@ public class UserResource extends ServerResource {
 	}
 
 	
-	@Autowired 
-	Greetings greetings;
+
+	
+	
+	@Autowired
+	UserDAO userDAO;
 	
 	@Get("?d1")
     public String demo1() {
-		// create a message with the content "World"
-        greetings.send("MANUEL ZEGARRA");
+        /*greetings.send("MANUEL ZEGARRA");
+        return greetings.receive();*/
         
-        return greetings.receive();
-        
+		User d = new User();
+		d.setName("manuel zegarra");
+		d.setUsername("mzegarra");
+		
+		
+		userDAO.insertUser(d);
+		
+		return "OK";
+		
 	}
 	@Get  
     public String toString() {  
