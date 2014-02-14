@@ -25,6 +25,11 @@
 				<entry key="/cliente" value="com.demo.ClienteResource" />
 				<entry key="/hello" value="com.demo.HelloWorldResource" />
 				<entry key="/order/{user}" value="com.demo.OrdersResource" />
+				<entry key="/user">
+					<bean class="org.restlet.ext.spring.SpringFinder">
+						<lookup-method name="create" bean="userResource" />
+					</bean>
+				</entry>
 				<entry key="/user/{user}">
 					<bean class="org.restlet.ext.spring.SpringFinder">
 						<lookup-method name="create" bean="userResource" />
@@ -52,7 +57,7 @@
 	
 		<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://10.0.2.15:9060/test" />
+		<property name="url" value="jdbc:mysql://127.0.0.1:3306/test" />
 		<property name="username" value="root" />
 		<property name="password" value="password" />
 	</bean>
